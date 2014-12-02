@@ -1,0 +1,42 @@
+body {
+    background : url('../../static/img/bg_tournesol.png') no-repeat center center fixed;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -khtml-opacity:.50; 
+    -moz-opacity:.50; 
+}
+
+.spacing {
+    margin-top : 3%;
+}
+
+.black-box {
+    background : #222;
+    padding : 2%;
+    box-shadow: 1px 1px 22px #111;
+    -moz-border-radius: 0px 0px 20px 0px;
+    -webkit-border-radius: 0px 0px 20px 0px;
+    border-radius: 0px 0px 20px 0px;
+    text-align : justify;
+}
+
+.black-box > h3 {
+    color : #428bca;
+    font-size : 32px;
+}
+
+.black-box > hr {
+    color : #428bca;
+}
+
+.black-box > div {
+    color : #fff;
+    font-size : 18px;
+}
+
+.black-box > img {
+    margin-top : 3%;
+    margin-left : 20px;
+}
