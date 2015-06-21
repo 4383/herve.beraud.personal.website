@@ -36,7 +36,11 @@
                 <ul class="nav nav-pills nav-stacked">
                     {% for category in categories %}
                         {% if category.active_at_loading %}
-                            <li class="active" role="presentation">
+                            {% if category == main_category %}
+                                <li class="active" role="presentation">
+                            {% else %}
+                                <li role="presentation">
+                            {% endif %}
                         {% else %}
                             <li role="presentation">
                         {% endif %}
@@ -78,31 +82,13 @@
             </div>
         </div>
         <div>
-            <h3 class="decorated-title">{% trans "Summary for my" %} {{ main_category.name }} {% trans "skills" %}</h3>
+            <h3 class="decorated-title">{% trans "Summary For My" %} {{ main_category.name }} {% trans "Skills" %}</h3>
             <div class="row">
-                <div class="col-md-3 widget">
-                    <h5>{% trans "Level by Technologies Knowledge" %}</h5>
-                {% for technology in technologies %}
-                    <div class="progress">
-                        {% if technology.level < 3 %}
-                        <div class="progress-bar progress-bar-striped active progress-bar-warning"
-                        {% elif technology.level < 4 %}
-                        <div class="progress-bar progress-bar-striped active progress-bar-success"
-                        {% else %}
-                        <div class="progress-bar progress-bar-striped active"
-                        {% endif %}
-                             role="progressbar"
-                             aria-valuenow="45"
-                             aria-valuemin="0"
-                             aria-valuemax="100"
-                             style="width: {{ technology.skills_level }}%">
-                            <span class="sr-only"></span>
-                            <a href="/skills/{{ technology.category.name }}/{{ technology.name }}/">{{ technology.name }}</a>
-                        </div>
-                    </div>
-                {% endfor %}
+                <div class="col-sm-2 widget">
+                    <p>{{ main_category.description }}</p>
                 </div>
-                <div class="col-md-4 widget">
+                <div class="col-sm-7 col-md-4 widget">
+                    <h5>{% trans "Compare between" %}</h5>
                     <canvas id="summaryChart" width="400" height="400"></canvas>
                     <script>
                     var data = {
@@ -124,6 +110,29 @@
                     var myRadarChart = new Chart(ctx).Radar(data, chartOptions);
                     myRadarChart.generateLegend();
                     </script>
+                </div>
+
+                <div class="col-sm-2 col-md-3 widget">
+                    <h5>{% trans "Level by Technology Knowledge" %}</h5>
+                    {% for technology in technologies %}
+                        <div class="progress">
+                            {% if technology.level < 3 %}
+                            <div class="progress-bar progress-bar-striped active progress-bar-warning"
+                            {% elif technology.level < 4 %}
+                            <div class="progress-bar progress-bar-striped active progress-bar-success"
+                            {% else %}
+                            <div class="progress-bar progress-bar-striped active"
+                            {% endif %}
+                                 role="progressbar"
+                                 aria-valuenow="45"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 style="width: {{ technology.skills_level }}%">
+                                <span class="sr-only"></span>
+                                <a href="/skills/{{ technology.category.name }}/{{ technology.name }}/">{{ technology.name }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

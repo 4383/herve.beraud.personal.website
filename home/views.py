@@ -9,7 +9,7 @@ def index(request):
 
 
 # Create your views here.
-def skills(request, category='Programing'):
+def skills(request, category='Programming'):
     main_category = Category.objects.get(name=category)
     # Les categories pour construire le menu
     categories = Category.objects.all().order_by('priority_display')
