@@ -1,4 +1,4 @@
-body {
+.default {
     background : url('../../static/img/bg_tournesol.png') no-repeat center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
@@ -8,35 +8,173 @@ body {
     -moz-opacity:.50; 
 }
 
+.skills-bg {
+    background : url('../../static/img/bg_skills.jpg') no-repeat center center fixed;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -khtml-opacity:.50; 
+    -moz-opacity:.50;
+}
+
 .spacing {
     margin-top : 3%;
 }
 
 .black-box {
     background : #222;
-    padding : 2%;
+    padding : 0%;
     box-shadow: 1px 1px 22px #111;
     -moz-border-radius: 0px 0px 20px 0px;
     -webkit-border-radius: 0px 0px 20px 0px;
     border-radius: 0px 0px 20px 0px;
     text-align : justify;
+    padding-right : 5px;
 }
 
 .black-box > h3 {
     color : #428bca;
     font-size : 32px;
+    padding-left : 5px;
+    padding-top : 5px;
+}
+
+.decorated-title {
+    color : #428bca;
+    font-size : 32px;
+    padding-top : 5px;
+    text-shadow : 0px 2px 10px #000;
+}
+
+.black-box > h4 {
+    color : #428bca;
+    font-size : 24px;
+    padding : 2%;
+    opacity : 1;
+}
+
+.progress-bar > a:link {
+    color : #fff;
+    text-decoration : underline;
+}
+
+.progress-bar > a:visited {
+    color : #fff;
+    text-decoration : underline;
+}
+
+.header-menu-black-box {
+    color : #428bca;
+    height : 6.7%;
+    text-align : center;
+    width : 100%;
+    border-bottom : rgba(66, 139, 202, 0.35) 1px solid;
 }
 
 .black-box > hr {
-    color : #428bca;
+    /*color : #428bca;*/
+    background-color : rgba(66, 139, 202, 0.35);
 }
 
 .black-box > div {
     color : #fff;
+    padding : 2%;
     font-size : 18px;
+}
+
+.menu-black-box > nav {
+    margin : 6%;
 }
 
 .black-box > img {
     margin-top : 3%;
     margin-left : 20px;
+}
+
+.menu-black-box {
+    margin-left : 0%;
+    margin-right : 0%;
+    position : fixed;
+    height : 100%;
+    width : 15%;
+    -khtml-opacity:.50;
+    -moz-opacity:.50;
+    background-color : rgba(0, 0, 0, 0.75);
+}
+
+.widget {
+    padding : 10px;
+    margin-left : 0%;
+    margin-right : 0%;
+    -khtml-opacity:.50;
+    -moz-opacity:.50;
+    background-color : rgba(0, 0, 0, 0.80);
+    box-shadow: 0px 10px 10px #000;
+    margin-left : 20px;
+    border : 1px solid rgba(76, 203, 122, 0.3);
+}
+
+.widget > h5 {
+    color : #4ccb7a;
+    font-weight : bold;
+    text-align : center;
+    text-decoration : underline;
+}
+
+.enlighted-menu {
+    background-color : rgba(66, 139, 202, 0.45);
+    border-bottom : gray 1px solid;
+    width : 100%;
+    min-height : 10%;
+    padding-top : 6px;
+    font-weight : bold;
+    font-size : 24px;
+    text-shadow : 0px 2px 10px #000;
+}
+
+.tierce-hauteur {
+    min-height : 33%;
+}
+
+.content {
+    min-height : 60%;
+    padding-left : 2%;
+    padding-right : 1%;
+}
+
+.presentation {
+    border : 1px #428bca solid;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin-right : 3%;
+    margin-bottom : 5px;
+}
+
+.presentation > h5 {
+    background : #428bca;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    padding : 5px;
+    text-align : center;
+}
+
+.infos {
+    background : #5c9761;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    padding : 5px;
+}
+
+.police-medium {
+    font-size : 15px;
+}
+
+.police-medium > em {
+    padding : 5px;
+    text-decoration : underline;
+    color : #428bca;
 }

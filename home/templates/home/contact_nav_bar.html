@@ -1,0 +1,339 @@
+<!-- Affichage des methodes de contact -->
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <nav class="navbar navbar-inverse navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                    <p class="navbar-text navbar-left">
+                        <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+                        <strong>{% trans "+33 661 840 417" %}</strong>
+                    </p>
+                    <p class="navbar-text navbar-right" style="text-aligne:right">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        <a href="mailto:herve.beraud@openmailbox.org">herve.beraud@openmailbox.org</a>
+                    </p>
+                </div>
+              </div>
+        </nav>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<!-- Affichage des techno -->
+    <div class="col-md-8" id="">
+        {% for category in categories %}
+            <div class="row">
+                <div class="spacing black-box" id="{{ category.name }}">
+                    <h4 class=''>{{ category.name }}</h4>
+                    {% for technology in technologies %}
+                        {% if technology.category == category %}
+                            <div class="row">
+                                <div class="col-md-9 content">
+                                    <div class="row">
+                                        <article class="col-md-5 presentation">
+                                            <h5><strong>{{ technology.name }}</strong></h5>
+                                            <p>{% trans "Level : " %}
+                                                <img src="{% static 'img/icone/{{ technology.name }}stars.png' %}"
+                                                     alt='{% trans "High Level" %}' />
+                                            </p>
+                                            <p>{% trans "Versions : " %}{{ technology.version }}</p>
+                                            <hr>
+                                            <p class="police-medium">
+                                                <em>{% trans "Usages :" %}</em>
+                                                {{ technology.usage }}
+                                            </p>
+                                            <hr>
+                                            <p class="police-medium">
+                                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                                {{ technology.api }}
+                                            </p>
+                                            <hr>
+                                            <p class="police-medium">
+                                                <em>{% trans "Tools :" %}</em>
+                                                {{ technology.tools }}
+                                            </p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+                    <!--
+                    <li class="active" role="presentation"><a href="#programming">{% trans "Programing" %}</a></li>
+                    <li role="presentation"><a href="#database">{% trans "Database" %}</a></li>
+                    <li role="presentation"><a href="#network">{% trans "Network" %}</a></li>
+                    <li role="presentation"><a href="#os">{% trans "Operanting Systems" %}</a></li>
+                    <li role="presentation"><a href="#security">{% trans "Security" %}</a></li>
+                    <li role="presentation"><a href="#methodologies">{% trans "Methodologies" %}</a></li>
+                    -->
+
+ <!--
+        <div class="row">
+            <section class="black-box">
+                <h4 class=''>{% trans 'Programing' %}</h4>
+                <div class="row">
+                    <div class="col-md-9 content">
+                        <div class="row">
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'Python' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/5stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}2.7 / 3 / 3.3 / 3.4</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    Video Games, Website, System Administration, Sockets, Security, HMI
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Pygame, Django, Tornado, Twisted, Fabric, Scapy, BeautifulSoup, WAMP, TKinter, PySide
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    Virtualenv, Setuptools, Gunicorn, 2to3, IDLE, PDB, Unittest, Doctest
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'JAVA' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/3stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}6 / 7</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    Website, Sockets, HMI
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, J2EE, Primefaces
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    Jenkins, Ant, Maven
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                        </div>
+                        <div class="row">
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'C / C++' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/3stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}ISO</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    Video Games, Sockets, HMI
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Qt, SDL
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    GCC, GDB
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'C#' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/2stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}4</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    HMI, Sockets
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Genesys Interaction Workspace
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    VisualStudio 2013
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                        </div>
+                        <div class="row">
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'PHP' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/3stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}ISO</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    Video Games, Sockets, HMI
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Qt, SDL
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    GCC, GDB
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'SHELL' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/2stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}4</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    HMI, Sockets
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Genesys Interaction Workspace
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    VisualStudio 2013
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                        </div>
+                        <div class="row">
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'HTML' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/3stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}ISO</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    Video Games, Sockets, HMI
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Qt, SDL
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    GCC, GDB
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                            <article class="col-md-5 presentation">
+                                <h5><strong>{% trans 'CSS' %}</strong></h5>
+                                <p>{% trans "Level : " %}<img src="{% static 'img/icone/2stars.png' %}" alt='{% trans "High Level" %}' /></p>
+                                <p>{% trans "Versions : " %}4</p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Usages :" %}</em>
+                                {% blocktrans %}
+                                    HMI, Sockets
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Frameworks & Packages :" %}</em>
+                                {% blocktrans %}
+                                    Stdlib, Genesys Interaction Workspace
+                                {% endblocktrans %}
+                                </p>
+                                <hr>
+                                <p class="police-medium">
+                                <em>{% trans "Tools :" %}</em>
+                                {% blocktrans %}
+                                    VisualStudio 2013
+                                {% endblocktrans %}
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="col-md-3 infos">
+                        <p>Test</p>
+                    </div>
+                </div>
+            </section>
+        </div>-->
+        <!--
+        <div class="row">
+            <div class="spacing black-box" id="network">
+                <h4 class=''>{% trans 'Network' %}</h4>
+                <div class="content">
+                    <p>{% trans 'test' %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="spacing black-box" id="os">
+                <h4 class=''>{% trans 'Operanting Systems' %}</h4>
+                <div class="content">
+                    <p>{% trans 'test' %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="spacing black-box" id="security">
+                <h4 class=''>{% trans 'Security' %}</h4>
+                <div class="content">
+                    <p>{% trans 'test' %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="spacing black-box" id="methodologies">
+                <h4 class=''>{% trans 'Methodologies' %}</h4>
+                <div class="content">
+                    <p>{% trans 'test' %}</p>
+                </div>
+            </div>
+        </div>
+        -->

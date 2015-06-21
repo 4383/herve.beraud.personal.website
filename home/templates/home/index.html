@@ -4,13 +4,13 @@
 
 {% block navhome %} 
 <li class="active">
-    <a href="#">Home</a>
+    <a href="{% url 'index' %}">Home</a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-4"></div>
+    <div class="col-md-1"></div>
     <div class="col-md-7">
         <div class="black-box">
                 <img src="{% static 'img/herve-beraud.png' %}" 
@@ -32,7 +32,7 @@
                 {% blocktrans %}
                 I talk about technology that I love (Python, Linux, Vim, Latex)
                 {% endblocktrans %}
-                <a href="skills">{% trans " and more skills here..." %}</a>
+                <a href="skills/">{% trans " and more skills here..." %}</a>
                 </p>
                 <p>
                 {% blocktrans %}

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load url from future %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -18,28 +19,13 @@
             } 
         </style>
         <![endif]-->
+        {% block js_beginnig %}
+        {% endblock %}
     </head>
-    <body>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <nav class="navbar navbar-inverse navbar-default" role="navigation">
-                      <div class="container-fluid">
-                        <div class="navbar-header">
-                            <p class="navbar-text navbar-left">
-                                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                                <strong>{% trans "+33 661 840 417" %}</strong>
-                            </p>
-                            <p class="navbar-text navbar-right" style="text-aligne:right">
-                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                <a href="mailto:herve.beraud@openmailbox.org">herve.beraud@openmailbox.org</a>
-                            </p>
-                        </div>
-                      </div>
-                </nav>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
+    {% block body %}
+    <body class="default">
+    {% endblock %}
+
         <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
             <div class="container-fluid">
                 <div class="nav-header">
@@ -49,12 +35,12 @@
                     <ul class="nav navbar-nav">
                         {% block navhome %}
                         <li>
-                            <a href="#">Home</a>
+                            <a href="{% url 'index' %}">Home</a>
                         </li>
                         {% endblock %}
                         {% block navskills %}
                         <li>
-                            <a href="#">Skills</a>
+                            <a href="{% url 'skills' %}">Skills</a>
                         </li>
                         {% endblock %}
                         {% block navprojects %}
