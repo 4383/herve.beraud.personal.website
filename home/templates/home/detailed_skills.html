@@ -1,10 +1,123 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "home/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
 
-</body>
-</html>
+{% block title %}
+{% trans 'Hervé BERAUD ~ Skills and Technology' %}
+{% endblock %}
+
+{% block js_beginnig %}
+<script src="{% static 'js/lib/chart/Chart.js' %}"></script>
+<script src="{% static 'js/chartOptions.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<body class="skills-bg">
+{% endblock %}
+
+
+{% block navskills %}
+<li class="active">
+    <a href="{% url 'skills' %}">Skills</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if categories %}
+    <div class="col-md-2 hidden-xs hidden-sm hidden-md">
+        <div class="menu-black-box">
+            <div class="header-menu-black-box">
+                <h3>{% trans "Skills" %}</h3>
+            </div>
+            <nav>
+                <ul class="nav nav-pills nav-stacked">
+                    {% for category in categories %}
+                        {% if category.active_at_loading %}
+                            {% if category == main_category %}
+                                <li class="active" role="presentation">
+                            {% else %}
+                                <li role="presentation">
+                            {% endif %}
+                        {% else %}
+                            <li role="presentation">
+                        {% endif %}
+                        <a href="{% url 'skills' %}{{ category.name }}/" title="{{ category.alt_description }}">
+                        {{ category.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    {% else %}
+    <strong style="color:red">{% trans "No results was found" %}</strong>
+    {% endif %}
+
+    {% if technologies %}
+    <div class="col-lg-10">
+        <div class="row">
+            <div class="row enlighted-menu hidden-xs">
+                <nav>
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse navbar-left">
+                            <ul class="nav navbar-nav">
+                                {% for technology in technologies %}
+                                        {% if technology == main_technology %}
+                                            <li style="text-decoration : underline;">
+                                        {% else %}
+                                            <li>
+                                        {% endif %}
+                                        <a href="/skills/{{ technology.category.name }}/{{ technology.name }}/">
+                                            {% if technology.icon %}
+                                                <img style="height:24px; width:24px;" src="{% get_media_prefix %}{{ technology.icon }}" alt="" />
+                                            {% endif %}
+                                            {{ technology.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
+
+            <h3 class="decorated-title">
+                {% if main_technology.icon %}
+                    <img src="{% get_media_prefix %}{{ main_technology.icon }}" style="height:64px; width:64px;" />
+                {% endif %}
+                {{ main_technology.name }} {% trans "Skills Overview" %}
+            </h3>
+            {% if main_technology.level == 1 %}
+                <img src="{% static 'img/icone/1stars.png' %}" />
+            {% elif main_technology.level == 2 %}
+                <img src="{% static 'img/icone/2stars.png' %}" />
+            {% elif main_technology.level == 3 %}
+                <img src="{% static 'img/icone/3stars.png' %}" />
+            {% elif main_technology.level == 4 %}
+                <img src="{% static 'img/icone/4stars.png' %}" />
+            {% elif main_technology.level == 5 %}
+                <img src="{% static 'img/icone/5stars.png' %}" />
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-2 widget">
+                    <p>{{ main_technology.description }}</p>
+                </div>
+                <div class="col-sm-7 col-md-4 widget">
+                    <h5>{% trans "Compare between" %}</h5>
+                </div>
+
+                <div class="col-sm-2 col-md-3 widget">
+                    <h5>{% trans "Level by Technology Knowledge" %}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

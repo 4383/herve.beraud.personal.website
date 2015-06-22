@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name="index"),
     url(r'^skills/$', views.skills, name='skills'),
     url(r'^skills/(?P<category>[\w-]+)/$', views.skills, name='skills'),
-    url(r'^skills/(?P<category>[\w-]+)/(?P<technology>[\w-]+)/$', views.detailed_skills, name='detailed_skills')
+    url(r'^skills/(?P<category>[\w-]+)/(?P<technology>.*)/$', views.detailed_skills, name='detailed_skills')
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
