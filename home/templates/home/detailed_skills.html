@@ -89,31 +89,45 @@
 
             <h3 class="decorated-title">
                 {% if main_technology.icon %}
-                    <img src="{% get_media_prefix %}{{ main_technology.icon }}" style="height:64px; width:64px;" />
+                    <img src="{% get_media_prefix %}{{ main_technology.icon }}" style="height:48px; width:48px;" />
                 {% endif %}
                 {{ main_technology.name }} {% trans "Skills Overview" %}
             </h3>
-            {% if main_technology.level == 1 %}
-                <img src="{% static 'img/icone/1stars.png' %}" />
-            {% elif main_technology.level == 2 %}
-                <img src="{% static 'img/icone/2stars.png' %}" />
-            {% elif main_technology.level == 3 %}
-                <img src="{% static 'img/icone/3stars.png' %}" />
-            {% elif main_technology.level == 4 %}
-                <img src="{% static 'img/icone/4stars.png' %}" />
-            {% elif main_technology.level == 5 %}
-                <img src="{% static 'img/icone/5stars.png' %}" />
-            {% endif %}
             <div class="row">
-                <div class="col-sm-2 widget">
-                    <p>{{ main_technology.description }}</p>
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="widget" style="text-align:center;">
+                            <h5>{% trans "Level" %}</h5>
+                            {% if main_technology.level == 1 %}
+                                <img src="{% static 'img/icone/1stars.png' %}" />
+                            {% elif main_technology.level == 2 %}
+                                <img src="{% static 'img/icone/2stars.png' %}" />
+                            {% elif main_technology.level == 3 %}
+                                <img src="{% static 'img/icone/3stars.png' %}" />
+                            {% elif main_technology.level == 4 %}
+                                <img src="{% static 'img/icone/4stars.png' %}" />
+                            {% elif main_technology.level == 5 %}
+                                <img src="{% static 'img/icone/5stars.png' %}" />
+                            {% endif %}
+                        </div>
+                        <div class="widget" style="text-align:center;">
+                            <h5>{% trans "Used Versions" %}</h5>
+                            <p>{{ main_technology.version }}</p>
+                        </div>
+                        <div class="widget" style="text-align:justify;">
+                            <h5>{% trans "My Feelings about" %}</h5>
+                            <p>{{ main_technology.description }}</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-7 col-md-4 widget">
-                    <h5>{% trans "Compare between" %}</h5>
+                    <h5>{% trans "Used Frameworks And API" %}</h5>
+                    <p>{{ main_technology.api }}</p>
                 </div>
 
                 <div class="col-sm-2 col-md-3 widget">
-                    <h5>{% trans "Level by Technology Knowledge" %}</h5>
+                    <h5>{% trans "Used Tools" %}</h5>
+                    <p>{{ main_technology.tools }}</p>
                 </div>
             </div>
         </div>
