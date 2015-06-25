@@ -35,12 +35,8 @@
             <nav>
                 <ul class="nav nav-pills nav-stacked">
                     {% for category in categories %}
-                        {% if category.active_at_loading %}
-                            {% if category == main_category %}
-                                <li class="active" role="presentation">
-                            {% else %}
-                                <li role="presentation">
-                            {% endif %}
+                        {% if category == main_category %}
+                            <li class="active" role="presentation">
                         {% else %}
                             <li role="presentation">
                         {% endif %}
@@ -112,23 +108,48 @@
                         </div>
                         <div class="widget" style="text-align:center;">
                             <h5>{% trans "Used Versions" %}</h5>
-                            <p>{{ main_technology.version }}</p>
+                            {% for version in main_technology.version.all %}
+                                {% if version.official_website %}
+                                <a href="{{ version.official_website }}">{{ version.technical_name }}</a>
+                                {% else %}
+                                    {{ version.technical_name }}
+                                {% endif %}
+                                {% if not forloop.last %}
+                                /
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                        <div class="widget" style="text-align:justify;">
+                        <div class="widget" style="">
                             <h5>{% trans "My Feelings about" %}</h5>
                             <p>{{ main_technology.description }}</p>
                         </div>
                     </div>
                 </div>
+                {% if frameworks %}
                 <div class="col-sm-7 col-md-4 widget">
                     <h5>{% trans "Used Frameworks And API" %}</h5>
-                    <p>{{ main_technology.api }}</p>
+                    {% for framework in frameworks %}
+                    <ul>
+                        <li>
+                            {% if framework.official_website %}
+                            <a href="{{ framework.official_website }}" title="{{ framework.contextual_description }}">
+                                {{ framework.name }}
+                            </a>
+                            {% else %}
+                                {{ framework.name }}
+                            {% endif %}
+                            : {{ framework.description }}
+                        </li>
+                    </ul>
+                    {% endfor %}
                 </div>
-
+                {% endif %}
+                {% if main_technology.tools %}
                 <div class="col-sm-2 col-md-3 widget">
                     <h5>{% trans "Used Tools" %}</h5>
                     <p>{{ main_technology.tools }}</p>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

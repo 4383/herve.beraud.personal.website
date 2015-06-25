@@ -35,12 +35,8 @@
             <nav>
                 <ul class="nav nav-pills nav-stacked">
                     {% for category in categories %}
-                        {% if category.active_at_loading %}
-                            {% if category == main_category %}
-                                <li class="active" role="presentation">
-                            {% else %}
-                                <li role="presentation">
-                            {% endif %}
+                        {% if category == main_category %}
+                            <li class="active" role="presentation">
                         {% else %}
                             <li role="presentation">
                         {% endif %}
