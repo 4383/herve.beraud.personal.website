@@ -1,0 +1,33 @@
+{% extends "home/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load static %}
+{% load skills_extra %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block title %}
+{% trans 'Hervé BERAUD ~ Skills and Technology - ' %}{{ main_category }}
+{% endblock %}
+
+{% block body %}
+<body class="skills-bg">
+{% endblock %}
+
+
+{% block navskills %}
+<li class="active">
+    <a href="{% url 'skills' %}">Skills</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% show_categories_menu %}
+
+    <div class="col-lg-10">
+        {% show_technologies_menu %}
+        {% block focus %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

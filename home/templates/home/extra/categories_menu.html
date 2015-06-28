@@ -1,0 +1,23 @@
+{% load i18n %}
+<div class="col-md-2 hidden-xs hidden-sm hidden-md">
+    <div class="menu-black-box">
+        <div class="header-menu-black-box">
+            <h3>{% trans "Skills" %}</h3>
+        </div>
+        <nav>
+            <ul class="nav nav-pills nav-stacked">
+                {% for category in categories %}
+                    {% if category == active %}
+                        <li class="active" role="presentation">
+                    {% else %}
+                        <li role="presentation">
+                    {% endif %}
+                    <a href="{% url 'skills' %}{{ category.name }}/" title="{{ category.alt_description }}">
+                    {{ category.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>

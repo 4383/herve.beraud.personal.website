@@ -115,6 +115,10 @@
     border : 1px solid rgba(76, 203, 122, 0.3);
 }
 
+.widget > ul {
+    color : white;
+}
+
 .widget > h5 {
     color : #4ccb7a;
     font-weight : bold;
