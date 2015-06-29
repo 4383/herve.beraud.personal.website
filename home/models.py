@@ -56,3 +56,51 @@ class Framework(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.CharField(max_length=500)
+    contextual_description = models.CharField(max_length=100)
+    technology = models.ManyToManyField(Technology)
+    framework = models.ManyToManyField(Framework, blank=True)
+    tasks = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name
+
+
+class Employer(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=300)
+    contextual_description = models.CharField(max_length=100)
+    logo = models.ImageField(default="", upload_to="employer", blank=True)
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Client(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=300)
+    contextual_description = models.CharField(max_length=100)
+    logo = models.ImageField(default="", upload_to="client", blank=True)
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Job(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=500)
+    contextual_description = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    project = models.OneToOneField(Project)
+    employer = models.OneToOneField(Employer)
+    client = models.OneToOneField(Client)
+
+    def __str__(self):
+        return self.name
