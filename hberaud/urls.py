@@ -13,9 +13,11 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name="index"),
-    url(r'^skills/$', views.skills, name='skills'),
-    url(r'^skills/(?P<category>[\w-]+)/$', views.skills, name='skills'),
-    url(r'^skills/(?P<category>[\w-]+)/(?P<technology>.*)/$', views.detailed_skills, name='detailed_skills')
+    url(r'^skills/$', views.skills_overview, name='skills'),
+    url(r'^skills/(?P<category>[\w-]+)/$', views.skills_overview, name='skills'),
+    url(r'^skills/(?P<category>[\w-]+)/(?P<technology>.*)/$', views.skills_detail, name='skills_detail'),
+    url(r'^jobs/$', views.jobs_overview, name='jobs'),
+    url(r'^jobs/(?P<job>[\w-]+/$)', views.jobs_overview, name='jobs'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from home.models import Category
 from home.models import Technology
@@ -10,7 +11,7 @@ def index(request):
 
 
 # Create your views here.
-def skills(request, category='Programming', context={}):
+def skills_overview(request, category='Programming', context={}):
     main_category = Category.objects.get(name=category)
     # Les technologies associées aux catégories afin de générer le contenu
     technologies = Technology.objects.all().filter(category=main_category, active=True).order_by('priority_display')
@@ -26,14 +27,25 @@ def skills(request, category='Programming', context={}):
     return render(request, "home/skills/overview.html", context)
 
 
-def detailed_skills(request, category, technology, context={}):
-    main_category = Category.objects.get(name=category)
-    # Les technologies associées aux catégories afin de générer le contenu
-    main_technology = Technology.objects.get(name=technology)
-    frameworks = Framework.objects.all().filter(active=True, technology=main_technology)
-    context = {
-               'main_technology': main_technology,
-               "main_category": main_category,
-               "max_level": 5,
-               "frameworks": frameworks, }
+def skills_detail(request, category, technology, context={}):
+    try:
+        main_technology = Technology.objects.get(name=technology)
+        main_category = Category.objects.get(name=category)
+        frameworks = Framework.objects.all().filter(active=True, technology=main_technology)
+        context = {"main_technology": main_technology,
+                   "main_category": main_category,
+                   "max_level": 5,
+                   "frameworks": frameworks, }
+    except Technology.DoesNotExist:
+        raise Http404("Technology does not exist. Page not found")
+    except Category.DoesNotExist:
+        raise Http404("Category does not exist. Page not found")
     return render(request, "home/skills/detail.html", context)
+
+
+def jobs_overview(request):
+    return render(request, "home/jobs/overview.html")
+
+
+def jobs_detail(request, name):
+    return render(request, "home/jobs/detail.html")
