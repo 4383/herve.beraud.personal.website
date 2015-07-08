@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.TextField()
     alt_description = models.CharField(max_length=150, default=_("Show more details about this category"))
     priority_display = models.IntegerField(default=0)
     active = models.BooleanField(default=False)
@@ -18,7 +18,7 @@ class Version(models.Model):
     technical_name = models.CharField(max_length=60)
     official_website = models.URLField(blank=True)
     contextual_description = models.CharField(max_length=50, default=_("Show more details about this version"))
-    description = models.CharField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name + " " + self.technical_name
@@ -26,7 +26,7 @@ class Version(models.Model):
 
 class Technology(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.TextField()
     contextual_description = models.CharField(max_length=50, default=_("Show more details about this technology"))
     version = models.ManyToManyField(Version, blank=True)
     official_website = models.URLField(blank=True, default="")
@@ -47,7 +47,7 @@ class Technology(models.Model):
 
 class Framework(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.TextField()
     version = models.ManyToManyField(Version, blank=True)
     technology = models.ForeignKey(Technology)
     contextual_description = models.CharField(max_length=50, default=_("Visit the official website"))
@@ -60,47 +60,42 @@ class Framework(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=150)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     contextual_description = models.CharField(max_length=100)
     technology = models.ManyToManyField(Technology)
     framework = models.ManyToManyField(Framework, blank=True)
     tasks = models.CharField(max_length=300)
+    url = models.URLField()
 
     def __str__(self):
         return self.name
 
 
-class Employer(models.Model):
-    name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=300)
-    contextual_description = models.CharField(max_length=100)
+class Company(models.Model):
+    name = models.CharField(max_length=150, unique=True, default="")
+    description = models.TextField(max_length=300, default="")
+    contextual_description = models.CharField(max_length=100, default="")
     logo = models.ImageField(default="", upload_to="employer", blank=True)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, default="")
+    url = models.URLField()
 
     def __str__(self):
         return self.name
 
 
-class Client(models.Model):
-    name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=300)
-    contextual_description = models.CharField(max_length=100)
-    logo = models.ImageField(default="", upload_to="client", blank=True)
-    location = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
+class Employer(Company):
+    projects = models.ManyToManyField(Project, through="Job")
 
 
 class Job(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     contextual_description = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()
-    project = models.OneToOneField(Project)
-    employer = models.OneToOneField(Employer)
-    client = models.OneToOneField(Client)
+    project = models.ForeignKey(Project)
+    employer = models.ForeignKey(Employer, related_name="employer", default=None)
+    client = models.OneToOneField(Company, related_name="client", default=None)
 
     def __str__(self):
         return self.name
