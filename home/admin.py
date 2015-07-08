@@ -3,25 +3,11 @@ from home.models import Technology
 from home.models import Category
 from home.models import Framework
 from home.models import Version
+from home.models import Job
+from home.models import Project
+from home.models import Company
+from home.models import Employer
 
 
-class TechhnologyAdmin(admin.ModelAdmin):
-    pass
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    pass
-
-
-class VersionAdmin(admin.ModelAdmin):
-    pass
-
-
-class FrameworkAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Technology, TechhnologyAdmin)
-admin.site.register(Version, VersionAdmin)
-admin.site.register(Framework, FrameworkAdmin)
+admin.site.register([Category, Technology, Version, Framework,
+                     Job, Company, Project, Employer])
