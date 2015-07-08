@@ -66,6 +66,7 @@ class Project(models.Model):
     framework = models.ManyToManyField(Framework, blank=True)
     tasks = models.CharField(max_length=300)
     url = models.URLField()
+    personal_project = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -77,7 +78,7 @@ class Company(models.Model):
     contextual_description = models.CharField(max_length=100, default="")
     logo = models.ImageField(default="", upload_to="employer", blank=True)
     location = models.CharField(max_length=100, default="")
-    url = models.URLField()
+    official_website = models.URLField()
 
     def __str__(self):
         return self.name
