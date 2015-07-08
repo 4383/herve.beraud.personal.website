@@ -24,7 +24,7 @@
             <canvas id="summaryChart" width="400" height="400"></canvas>
             <script>
             var data = {
-                labels: {{ chart_data_label|safe }},
+                labels: {{ js_chart_data_label|safe }},
                 datasets: [
                     {
                         label: "My First dataset",
@@ -34,7 +34,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: {{ chart_data_level }}
+                        data: {{ js_chart_data_level }}
                     }
                 ]
             };
