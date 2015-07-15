@@ -17,7 +17,7 @@
     <h3 class="decorated-title">{% trans "Summary For My" %} {{ main_category.name }} {% trans "Skills" %}</h3>
     <div class="row">
         <div class="col-sm-2 widget">
-            <p>{{ main_category.description }}</p>
+            <p>{{ main_category.description|linebreaksbr }}</p>
         </div>
         <div class="col-sm-7 col-md-4 widget">
             <h5>{% trans "Compare between" %}</h5>

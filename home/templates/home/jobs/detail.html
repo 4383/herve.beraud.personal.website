@@ -1,0 +1,91 @@
+{% extends "home/skills/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block title %}
+{% trans 'Hervé BERAUD ~ Skills and Technology - ' %}{{ main_category }} {{ main_technology }}
+{% endblock %}
+
+{% block focus %}
+<div>
+    <h3 class="decorated-title">
+        {% if main_technology.icon %}
+            <img src="{% get_media_prefix %}{{ main_technology.icon }}" style="height:48px; width:48px;" />
+        {% endif %}
+        {{ main_technology.name }} {% trans "Skills Overview" %}
+    </h3>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="row">
+                <div class="widget" style="text-align:center;">
+                    <h5>{% trans "Level" %}</h5>
+                    {% if main_technology.level == 1 %}
+                        <img src="{% static 'img/icone/1stars.png' %}" />
+                    {% elif main_technology.level == 2 %}
+                        <img src="{% static 'img/icone/2stars.png' %}" />
+                    {% elif main_technology.level == 3 %}
+                        <img src="{% static 'img/icone/3stars.png' %}" />
+                    {% elif main_technology.level == 4 %}
+                        <img src="{% static 'img/icone/4stars.png' %}" />
+                    {% elif main_technology.level == 5 %}
+                        <img src="{% static 'img/icone/5stars.png' %}" />
+                    {% endif %}
+                </div>
+                <div class="widget" style="text-align:center;">
+                    <h5>{% trans "Used Versions" %}</h5>
+                    {% for version in main_technology.version.all %}
+                        {% if version.official_website %}
+                        <a href="{{ version.official_website }}" title="{{ version.contextual_description }}">{{ version.technical_name }}</a>
+                        {% else %}
+                            {{ version.technical_name }}
+                        {% endif %}
+                        {% if not forloop.last %}
+                        /
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="widget" style="">
+                    <h5>{% trans "My Feelings about" %}</h5>
+                    <p>{{ main_technology.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-4">
+            {% if main_technology.usage %}
+            <div class="widget">
+                <h5>{% trans "Usage" %}</h5>
+                <p>{{ main_technology.usage }}</p>
+            </div>
+            {% endif %}
+            {% if frameworks %}
+            <div class="widget">
+                <h5>{% trans "Used Frameworks And API" %}</h5>
+                <ul>
+                    {% for framework in frameworks %}
+                        <li>
+                            {% if framework.official_website %}
+                            <a href="{{ framework.official_website }}" title="{{ framework.contextual_description }}">
+                                {{ framework.name }}
+                            </a>
+                            {% else %}
+                                {{ framework.name }}
+                            {% endif %}
+                            : {{ framework.description }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if main_technology.tools %}
+        <div class="col-sm-2 col-md-3 widget">
+            <h5>{% trans "Used Tools" %}</h5>
+            <p>{{ main_technology.tools }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

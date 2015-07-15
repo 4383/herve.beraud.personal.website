@@ -9,5 +9,10 @@ from home.models import Company
 from home.models import Employer
 
 
+class JobAdmin(admin.ModelAdmin):
+    list_display = ("name", "employer", "client", "start_date", "end_date")
+
+
 admin.site.register([Category, Technology, Version, Framework,
-                     Job, Company, Project, Employer])
+                     Company, Project, Employer])
+admin.site.register(Job, JobAdmin)

@@ -65,7 +65,7 @@ class Project(models.Model):
     technology = models.ManyToManyField(Technology)
     framework = models.ManyToManyField(Framework, blank=True)
     tasks = models.CharField(max_length=300)
-    url = models.URLField()
+    url = models.URLField(default="")
     personal_project = models.BooleanField(default=False)
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Company(models.Model):
     contextual_description = models.CharField(max_length=100, default="")
     logo = models.ImageField(default="", upload_to="employer", blank=True)
     location = models.CharField(max_length=100, default="")
-    official_website = models.URLField()
+    official_website = models.URLField(default="")
 
     def __str__(self):
         return self.name
@@ -86,6 +86,7 @@ class Company(models.Model):
 
 class Employer(Company):
     projects = models.ManyToManyField(Project, through="Job")
+    current_employer = models.BooleanField(default=False)
 
 
 class Job(models.Model):
@@ -93,10 +94,13 @@ class Job(models.Model):
     description = models.TextField(max_length=500)
     contextual_description = models.CharField(max_length=100)
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
     project = models.ForeignKey(Project)
     employer = models.ForeignKey(Employer, related_name="employer", default=None)
-    client = models.OneToOneField(Company, related_name="client", default=None)
+    client = models.ForeignKey(Company, related_name="client", default=None)
 
     def __str__(self):
         return self.name
+
+    def generate_url(self):
+        return self.name.replace(" ", "+").lower()

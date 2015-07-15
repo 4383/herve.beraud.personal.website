@@ -18,6 +18,10 @@
     -moz-opacity:.50;
 }
 
+.jobs-bg {
+    background : url('../../static/img/bg_jobs.jpg') repeat;
+}
+
 .spacing {
     margin-top : 3%;
 }
@@ -45,6 +49,21 @@
     font-size : 32px;
     padding-top : 5px;
     text-shadow : 0px 10px 5px #000;
+}
+
+.decorated-title-enlighted {
+    color : #428bca;
+    font-size : 32px;
+    padding-top : 5px;
+    text-shadow : 0px 3px 2px #444;
+}
+
+
+.decorated-title-enlighted-small {
+    color : #428bca;
+    font-size : 24px;
+    padding-top : 5px;
+    text-shadow : 0px 3px 2px #444;
 }
 
 .black-box > h4 {
@@ -131,6 +150,32 @@
     font-size : 16px;
 }
 
+.white-widget {
+    padding : 10px;
+    margin-left : 0%;
+    margin-right : 0%;
+    -khtml-opacity:.50;
+    -moz-opacity:.50;
+    background-color : rgba(240, 240, 240, 0.80);
+    box-shadow: 0px 3px 3px #666;
+    border : 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.white-widget > ul {
+    color : white;
+}
+
+.white-widget > h5 {
+    color : #4ccb7a;
+    font-weight : bold;
+    text-align : center;
+    text-decoration : underline;
+}
+
+.white-widget > p {
+    color : white;
+    font-size : 16px;
+}
 .enlighted-menu {
     background-color : rgba(66, 139, 202, 0.45);
     border-bottom : gray 1px solid;

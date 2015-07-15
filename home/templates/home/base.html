@@ -43,9 +43,14 @@
                             <a href="{% url 'skills' %}">Skills</a>
                         </li>
                         {% endblock %}
+                        {% block navjobs %}
+                        <li>
+                            <a href="{% url 'jobs' %}">Jobs</a>
+                        </li>
+                        {% endblock %}
                         {% block navprojects %}
                         <li>
-                            <a href="#">Projects</a>
+                            <a href="#">Personal Projects</a>
                         </li>
                         {% endblock %}
                         {% block navcv %}

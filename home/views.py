@@ -4,6 +4,10 @@ from django.shortcuts import get_object_or_404
 from home.models import Category
 from home.models import Technology
 from home.models import Framework
+from home.models import Job
+from home.models import Project
+from home.models import Employer
+from home.models import Company
 
 
 # Create your views here.
@@ -34,7 +38,9 @@ def skills_detail(request, category, technology, context={}):
 
 
 def jobs_overview(request):
-    return render(request, "home/jobs/overview.html")
+    jobs = Job.objects.all().order_by('-start_date')
+    context = {"jobs": jobs, }
+    return render(request, "home/jobs/overview.html", context)
 
 
 def jobs_detail(request, name):
