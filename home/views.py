@@ -39,7 +39,14 @@ def skills_detail(request, category, technology, context={}):
 
 def jobs_overview(request):
     jobs = Job.objects.all().order_by('-start_date')
-    context = {"jobs": jobs, }
+    employers = Employer.objects.all()
+    job_distinct = Job.objects.values('client').distinct()
+    ids = []
+    for dict in job_distinct:
+        for key, value in dict.items():
+            ids.append(value)
+    clients = Company.objects.filter(pk__in=ids)
+    context = {"jobs": jobs, "employers": employers, "clients": clients}
     return render(request, "home/jobs/overview.html", context)
 
 
