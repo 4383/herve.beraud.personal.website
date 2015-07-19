@@ -62,9 +62,8 @@ class Project(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField(max_length=500)
     contextual_description = models.CharField(max_length=100)
-    technology = models.ManyToManyField(Technology)
-    framework = models.ManyToManyField(Framework, blank=True)
-    tasks = models.CharField(max_length=300)
+    technologies = models.ManyToManyField(Technology)
+    frameworks = models.ManyToManyField(Framework, blank=True)
     url = models.URLField(default="")
     personal_project = models.BooleanField(default=False)
 
@@ -103,4 +102,14 @@ class Job(models.Model):
         return self.name
 
     def generate_url(self):
-        return self.name.replace(" ", "+").lower()
+        project = self.project.name.replace(" ", "-").lower()
+        client = self.client.name.replace(" ", "-").lower()
+        employer = self.employer.name.replace(" ", '-').lower()
+        name = self.name.replace(" ", "-").lower()
+        return "{0}/{1}/{2}/{3}/{4}/".format(project, client, employer, name, self.id)
+
+
+class Tasks(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.TextField()
+    job = models.ForeignKey(Job)

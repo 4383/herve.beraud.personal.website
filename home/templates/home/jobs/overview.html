@@ -16,12 +16,12 @@
         <div class="col-md-1"></div>
         <div class="col-md-6">
             <h3 class="decorated-title-enlighted-small">{% trans "Jobs History" %}</h3>
-            <p><small>{% trans "Click on the links below for details job" %}</small></p>
-            <table class="table table-striped">
+            <p><small>{% trans "Click on the links below for detailed job" %}</small></p>
+            <table class="table table-striped incorporer" style="background:#eee;border:1px solid #ddd">
                 <tbody>
                     {% for job in jobs %}
                         <tr>
-                            <td><a href="/jobs/{{ job.generate_url }}">{{ job.name }}</a></td>
+                            <td><a href="/job/{{ job.generate_url }}" title="{{ job.contextual_description }}">{{ job.name }}</a></td>
                             <td>{{ job.start_date }} <span style="color:orange;font-weight:bold;">{% trans "to" %}</span> {{ job.end_date|default:"Now" }}</td>
                             <td>{{ job.employer.name }} & {{ job.client.name }} {% trans "project" %} : {{ job.project.name }}</td>
                         </tr>
@@ -39,7 +39,7 @@
                     {% for employer in employers %}
                         <li class="text-center">
                             <img class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ employer.logo }}" style="height:50px;"><br />
-                            <a href="" >{{ employer.name }}</a>
+                            <a href="" title="{{ employer.contextual_description }}">{{ employer.name }}</a>
                         </li>
                     {% endfor %}
                     </ul>
@@ -48,7 +48,7 @@
                     <h3 class="decorated-title-enlighted-small">{% trans "Clients Resume" %}</h3>
                     <ul class="list-unstyled list-inline">
                     {% for client in clients %}
-                        <li><img class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ client.logo }}"></li>
+                        <li><img class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ client.logo }}" style="height:50px;"></li>
                     {% endfor %}
                     </ul>
                 </div>

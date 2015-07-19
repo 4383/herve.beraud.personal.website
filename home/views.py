@@ -8,6 +8,7 @@ from home.models import Job
 from home.models import Project
 from home.models import Employer
 from home.models import Company
+from home.models import Tasks
 
 
 # Create your views here.
@@ -50,5 +51,8 @@ def jobs_overview(request):
     return render(request, "home/jobs/overview.html", context)
 
 
-def jobs_detail(request, name):
-    return render(request, "home/jobs/detail.html")
+def jobs_detail(request, project, client, employer, job, id):
+    job = get_object_or_404(Job, id=id)
+    tasks = Tasks.objects.all().filter(job__id=id)
+    context = {"job": job, "tasks": tasks}
+    return render(request, "home/jobs/detail.html", context)

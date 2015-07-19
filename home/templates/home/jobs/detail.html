@@ -1,91 +1,106 @@
-{% extends "home/skills/base.html" %}
+{% extends "home/jobs/base.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load static %}
 {% get_media_prefix as MEDIA_PREFIX %}
 
 {% block title %}
-{% trans 'Hervé BERAUD ~ Skills and Technology - ' %}{{ main_category }} {{ main_technology }}
+{% trans 'Hervé BERAUD ~ Job - ' %}
 {% endblock %}
 
 {% block focus %}
 <div>
-    <h3 class="decorated-title">
-        {% if main_technology.icon %}
-            <img src="{% get_media_prefix %}{{ main_technology.icon }}" style="height:48px; width:48px;" />
-        {% endif %}
-        {{ main_technology.name }} {% trans "Skills Overview" %}
-    </h3>
-    <div class="row">
-        <div class="col-sm-2">
+    <h2 class="decorated-title-enlighted" style="text-align:center;">
+        {{ job.name|capfirst }} {% trans "On" %} {{ job.project|capfirst }} {% trans "Project" %}<br />
+        <small>{{ job.start_date }} {% trans "To" %} {{ job.end_date|default:"Now" }}</small>
+    </h2>
+    <div class="row" style="margin-bottom:100px;">
+        <!-- Layout -->
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
             <div class="row">
-                <div class="widget" style="text-align:center;">
-                    <h5>{% trans "Level" %}</h5>
-                    {% if main_technology.level == 1 %}
-                        <img src="{% static 'img/icone/1stars.png' %}" />
-                    {% elif main_technology.level == 2 %}
-                        <img src="{% static 'img/icone/2stars.png' %}" />
-                    {% elif main_technology.level == 3 %}
-                        <img src="{% static 'img/icone/3stars.png' %}" />
-                    {% elif main_technology.level == 4 %}
-                        <img src="{% static 'img/icone/4stars.png' %}" />
-                    {% elif main_technology.level == 5 %}
-                        <img src="{% static 'img/icone/5stars.png' %}" />
-                    {% endif %}
-                </div>
-                <div class="widget" style="text-align:center;">
-                    <h5>{% trans "Used Versions" %}</h5>
-                    {% for version in main_technology.version.all %}
-                        {% if version.official_website %}
-                        <a href="{{ version.official_website }}" title="{{ version.contextual_description }}">{{ version.technical_name }}</a>
-                        {% else %}
-                            {{ version.technical_name }}
-                        {% endif %}
-                        {% if not forloop.last %}
-                        /
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="widget" style="">
-                    <h5>{% trans "My Feelings about" %}</h5>
-                    <p>{{ main_technology.description }}</p>
-                </div>
+                <h3 class="decorated-title-enlighted-small">
+                    {% trans "Job Description" %}
+                </h3>
+                {% if not job.end_date %}
+                    <p>
+                        <span class="label label-primary">{% trans "My Current Job" %}</span>
+                    </p>
+                {% endif %}
+                <p>{{ job.description }}</p>
             </div>
-        </div>
-        <div class="col-sm-7 col-md-4">
-            {% if main_technology.usage %}
-            <div class="widget">
-                <h5>{% trans "Usage" %}</h5>
-                <p>{{ main_technology.usage }}</p>
+            <div class="row">
+                <h3 class="decorated-title-enlighted-small">{% trans "Project Description" %}</h3>
+                <p>{{ job.project.description }}</p>
+                {% if job.project.url %}
+                <a href="{{ job.project.url }}">{% trans "View Official Project" %}</a>
+                {% endif %}
+            </div>
+            {% if tasks %}
+            <div class="row">
+                <h3 class="decorated-title-enlighted-small">{% trans "Personal Tasks On This Project" %}</h3>
+                {% for task in tasks %}
+                <h5>{{ task.name }}</h5>
+                <p>{{ task.description }}</p>
+                {% endfor %}
             </div>
             {% endif %}
-            {% if frameworks %}
-            <div class="widget">
-                <h5>{% trans "Used Frameworks And API" %}</h5>
+            <div class="row">
+                <h3 class="decorated-title-enlighted-small">{% trans "Used Technologies" %}</h3>
                 <ul>
-                    {% for framework in frameworks %}
-                        <li>
-                            {% if framework.official_website %}
-                            <a href="{{ framework.official_website }}" title="{{ framework.contextual_description }}">
-                                {{ framework.name }}
-                            </a>
-                            {% else %}
-                                {{ framework.name }}
-                            {% endif %}
-                            : {{ framework.description }}
-                        </li>
+                    {% for technology in job.project.technologies.all %}
+                    <li><a href="/skills/{{ technology.category }}/{{ technology.name }}">{{ technology }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %}
+            <div class="row">
+                <h3 class="decorated-title-enlighted-small">{% trans "Used Frameworks" %}</h3>
+                <ul>
+                    {% for framework in job.project.frameworks.all %}
+                    {% if framework.official_website %}
+                        <li><a href="{{ framework.official_website }}" title="{% trans 'Visit the official website' %}">
+                            {{ framework }}</a></li>
+                    {% else %}
+                        <li>{{ framework }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
+        <!-- Layout -->
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+            <div class="row">
+                <h3 class="decorated-title-enlighted-small">{% trans "Employer Informations" %}</h3>
+                <img style="margin-bottom:10px;height:50px;"
+                     class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ job.employer.logo }}" >
+                <p>{% trans "Name" %} :
+                    <a href="{{ job.employer.official_website }}" title="{% trans 'Visit the official website' %}">
+                        {{ job.employer }}
+                    </a>
+                </p>
+                <p>{% trans "Location" %} : {{ job.employer.location }}</p>
+                <p>{% trans "Description" %} : {{ job.employer.description }}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
 
-        {% if main_technology.tools %}
-        <div class="col-sm-2 col-md-3 widget">
-            <h5>{% trans "Used Tools" %}</h5>
-            <p>{{ main_technology.tools }}</p>
+                <div class="row">
+                    <h3 class="decorated-title-enlighted-small">{% trans "Client Informations" %}</h3>
+                    <img style="height:50px;margin-bottom:10px;"
+                         class="img-thumbnail incorporer"
+                         src="{% get_media_prefix %}{{ job.client.logo }}">
+                    <p>{% trans "Name" %} :
+                        <a href="{{ job.client.official_website }}" title="{% trans 'Visit the official website' %}">
+                            {{ job.client.name }}
+                        </a>
+                    </p>
+                    <p>{% trans "Location" %} : {{ job.client.location }}</p>
+                    <p>{% trans "Description" %} : {{ job.client.description }}</p>
+                </div>
+            </div>
         </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

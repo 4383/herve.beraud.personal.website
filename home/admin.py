@@ -7,10 +7,16 @@ from home.models import Job
 from home.models import Project
 from home.models import Company
 from home.models import Employer
+from home.models import Tasks
+
+
+class TasksStackedInline(admin.StackedInline):
+    model = Tasks
 
 
 class JobAdmin(admin.ModelAdmin):
     list_display = ("name", "employer", "client", "start_date", "end_date")
+    inlines = [TasksStackedInline]
 
 
 admin.site.register([Category, Technology, Version, Framework,
