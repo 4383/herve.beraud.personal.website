@@ -33,7 +33,7 @@
                 <h3 class="decorated-title-enlighted-small">{% trans "Project Description" %}</h3>
                 <p>{{ job.project.description }}</p>
                 {% if job.project.url %}
-                <a href="{{ job.project.url }}">{% trans "View Official Project" %}</a>
+                <a href="{{ job.project.url }}">{% trans "View Project Website" %}</a>
                 {% endif %}
             </div>
             {% if tasks %}
@@ -45,16 +45,25 @@
                 {% endfor %}
             </div>
             {% endif %}
+            {% if job.project.technologies.all %}
             <div class="row">
-                <h3 class="decorated-title-enlighted-small">{% trans "Used Technologies" %}</h3>
+                <h3 class="decorated-title-enlighted-small">
+                    {% trans "Used Technologies" %}
+                    ({{ job.project.technologies.all|length }})
+                </h3>
                 <ul>
                     {% for technology in job.project.technologies.all %}
                     <li><a href="/skills/{{ technology.category }}/{{ technology.name }}">{{ technology }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
+            {% if job.project.frameworks.all %}
             <div class="row">
-                <h3 class="decorated-title-enlighted-small">{% trans "Used Frameworks" %}</h3>
+                <h3 class="decorated-title-enlighted-small">
+                    {% trans "Used Frameworks" %}
+                    ({{ job.project.frameworks.all|length }})
+                </h3>
                 <ul>
                     {% for framework in job.project.frameworks.all %}
                     {% if framework.official_website %}
@@ -66,6 +75,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
         <!-- Layout -->
         <div class="col-sm-1"></div>
