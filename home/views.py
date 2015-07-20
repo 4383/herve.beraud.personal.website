@@ -56,3 +56,9 @@ def jobs_detail(request, project, client, employer, job, id):
     tasks = Tasks.objects.all().filter(job__id=id)
     context = {"job": job, "tasks": tasks}
     return render(request, "home/jobs/detail.html", context)
+
+
+def projects_overview(request):
+    projects = Project.objects.all().filter(personal_project=True)
+    context = {"projects": projects}
+    return render(request, "home/projects/overview.html", context)
