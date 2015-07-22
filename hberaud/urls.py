@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^job/(?P<project>[\w-]+)/(?P<client>[\w-]+)/(?P<employer>[\w-]+)/(?P<job>[\w-]+)/(?P<id>[1-9]+)/$',
         views.jobs_detail, name='jobs_detail'),
     url(r'^projects/$', views.projects_overview, name='projects'),
+    url(r'^project/(?P<name>[\w-]+)/(?P<id>[\w-]+)/$', views.projects_detail, name='projects_detail'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

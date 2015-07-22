@@ -16,65 +16,37 @@
     <div class="row">
         <!-- Layout -->
         <div class="col-md-2"></div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <h3 class="decorated-title-enlighted-small">
-                {% trans "Projects Overview" %}
-                ({{ projects.all|length }})
+                {% trans "Overview" %}
+                ({{ projects.all|length }} {% trans "Project" %}{{ projects.all|pluralize }})
             </h3>
             <p><small>{% trans "Click on projects below for see details" %}</small></p>
-            <table class="table table-striped incorporer" style="background:#eee;border:1px solid #ddd">
-                <tbody>
-                    {% for project in projects %}
-                        <div class="panel panel-default incorporer">
-                            <div class="panel-body">
-                                <img src="{% get_media_prefix %}{{ project.logo }}"
-                                     style="float:{% cycle 'left' 'right' %};height:100px;margin-left:10px;margin-right:10px;"
-                                     class="img-thumbnail">
-                                <p style="">{{ project.description }}</p>
+            {% for project in projects %}
+                <div class="panel panel-default incorporer">
+                    <div class="panel-body">
+                        <img src="{% get_media_prefix %}{{ project.logo }}"
+                             style="float:{% cycle 'left' 'right' %};height:100px;margin-left:10px;margin-right:10px;"
+                             class="img-thumbnail">
+                        <p style="">{{ project.description }}</p>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4 class="text-left">{{ project.name|capfirst }}</h4>
                             </div>
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <h4 class="text-left">{{ project.name|capfirst }}</h4>
-                                    </div>
-                                    <div class="col-sm-6 text-right">
-                                        <a href="" title="{{ project.contextual_description }}">
-                                            <span class="glyphicon glyphicon-hand-up"></span>
-                                            {% trans "Click To See Details" %}
-                                        </a>
-                                    </div>
-                                </div>
+                            <div class="col-sm-6 text-right">
+                                <a href="{% url 'projects_detail' name=project.name id=project.id %}" title="{{ project.contextual_description }}">
+                                    <span class="glyphicon glyphicon-hand-up"></span>
+                                    {% trans "Click To See Details" %}
+                                </a>
                             </div>
                         </div>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <!-- Layout -->
-        <div class="col-sm-1"></div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="row">
-                    <h3 class="decorated-title-enlighted-small">{% trans "Employers Resume" %}</h3>
-                    <ul class="list-unstyled list-inline">
-                    {% for employer in employers %}
-                        <li class="text-center">
-                            <img class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ employer.logo }}" style="height:50px;"><br />
-                            <a href="" title="{{ employer.contextual_description }}">{{ employer.name }}</a>
-                        </li>
-                    {% endfor %}
-                    </ul>
+                    </div>
                 </div>
-                <div class="row">
-                    <h3 class="decorated-title-enlighted-small">{% trans "Clients Resume" %}</h3>
-                    <ul class="list-unstyled list-inline">
-                    {% for client in clients %}
-                        <li><img class="img-thumbnail incorporer" src="{% get_media_prefix %}{{ client.logo }}" style="height:50px;"></li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div>
+            {% endfor %}
         </div>
+        {% include "home/projects/github.html" %}
     </div>
 </div>
 {% endblock %}

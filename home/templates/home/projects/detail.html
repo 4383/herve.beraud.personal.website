@@ -5,68 +5,62 @@
 {% get_media_prefix as MEDIA_PREFIX %}
 
 {% block title %}
-{% trans 'Hervé BERAUD ~ Job - ' %}
+{% trans 'Hervé BERAUD ~ Project - ' %}{{ project.name }}
 {% endblock %}
 
 {% block focus %}
 <div>
     <h2 class="decorated-title-enlighted" style="text-align:center;">
-        {{ job.name|capfirst }} {% trans "On" %} {{ job.project|capfirst }} {% trans "Project" %}<br />
+        {{ project.name|capfirst }} {% trans "Project" %}<br />
     </h2>
     <div class="row" style="margin-bottom:100px;">
         <!-- Layout -->
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4">
-            <div class="row">
-                <h3 class="decorated-title-enlighted-small">
-                    {% trans "Job Description" %}
-                </h3>
-                <p>{{ job.description }}</p>
-            </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
             <div class="row">
                 <h3 class="decorated-title-enlighted-small">{% trans "Project Description" %}</h3>
-                <p>{{ job.project.description }}</p>
-                {% if job.project.url %}
-                <a href="{{ job.project.url }}">{% trans "View Official Project" %}</a>
-                {% endif %}
+                <div class="panel panel-default incorporer">
+                    <div class="panel-body">
+                        <p>{{ project.description }}</p>
+                    </div>
+                    {% if project.url %}
+                        <div class="panel-footer">
+                            <a href="{{ project.url }}">{% trans "View Official Project" %}</a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
             <div class="row">
                 <h3 class="decorated-title-enlighted-small">{% trans "Used Technologies" %}</h3>
-                <ul>
-                    {% for technology in job.project.technologies.all %}
-                    <li><a href="/skills/{{ technology.category }}/{{ technology.name }}">{{ technology }}</a></li>
-                    {% endfor %}
-                </ul>
+                <div class="panel panel-default incorporer">
+                    <div class="panel-body">
+                        <ul>
+                            {% for technology in project.technologies.all %}
+                            <li><a href="/skills/{{ technology.category }}/{{ technology.name }}">{{ technology }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <h3 class="decorated-title-enlighted-small">{% trans "Used Frameworks" %}</h3>
-                <ul>
-                    {% for framework in job.project.frameworks.all %}
-                    {% if framework.official_website %}
-                        <li><a href="{{ framework.official_website }}" title="{% trans 'Visit the official website' %}">
-                            {{ framework }}</a></li>
-                    {% else %}
-                        <li>{{ framework }}</li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <!-- Layout -->
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">
-            <div class="row">
-                <h3 class="decorated-title-enlighted-small">{% trans "Employer Informations" %}</h3>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-
-                <div class="row">
-                    <h3 class="decorated-title-enlighted-small">{% trans "Client Informations" %}</h3>
+                <div class="panel panel-default incorporer">
+                    <div class="panel-body">
+                        <ul>
+                            {% for framework in project.frameworks.all %}
+                            {% if framework.official_website %}
+                                <li><a href="{{ framework.official_website }}" title="{% trans 'Visit the official website' %}">
+                                    {{ framework }}</a></li>
+                            {% else %}
+                                <li>{{ framework }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        {% include "home/projects/github.html" %}
     </div>
 </div>
 {% endblock %}

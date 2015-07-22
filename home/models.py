@@ -71,6 +71,8 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def generate_url(self):
+        return self.name.replace(" ", "-")
 
 class Company(models.Model):
     name = models.CharField(max_length=150, unique=True, default="")

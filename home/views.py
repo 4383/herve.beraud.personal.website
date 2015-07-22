@@ -62,3 +62,9 @@ def projects_overview(request):
     projects = Project.objects.all().filter(personal_project=True)
     context = {"projects": projects}
     return render(request, "home/projects/overview.html", context)
+
+
+def projects_detail(request, name, id):
+    project = get_object_or_404(Project, id=id)
+    context = {'project': project}
+    return render(request, "home/projects/detail.html", context)
