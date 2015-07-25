@@ -32,14 +32,14 @@
                 {% blocktrans %}
                 I talk about technology that I love (Python, Linux, Vim, Latex)
                 {% endblocktrans %}
-                <a href="skills/">{% trans " and more skills here..." %}</a>
+                <a href="{% url 'skills' %}">{% trans " and more skills here..." %}</a>
                 </p>
                 <p>
                 {% blocktrans %}
                 I found pleasure to work on embded systems, web projects, video games, 
                 you can follow all my  
                 {% endblocktrans %}
-                <a href="projects-and-achivements">
+                <a href="{% url 'projects' %}">
                     {% trans " personal projects and my achievements here." %}
                 </a>
                 </p>

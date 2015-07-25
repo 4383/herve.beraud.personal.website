@@ -116,3 +116,31 @@ class Tasks(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
     job = models.ForeignKey(Job)
+
+
+class CV(models.Model):
+    name = models.CharField(max_length=150)
+    created = models.DateField(auto_now=True, auto_now_add=True)
+    repo_name = models.CharField(max_length=250, default="")
+    compile_command = models.CharField(max_length=500, default="")
+    url = models.URLField()
+    source = models.URLField(default="")
+    pdf = models.FileField(default="", upload_to="cv")
+    official = models.BooleanField(default=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    text = models.TextField()
+    telephone = models.CharField(max_length=50)
+    email = models.EmailField()
+    main = models.BooleanField(default=True, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def convert_email(self):
+        return self.email.replace('@', ' at ')

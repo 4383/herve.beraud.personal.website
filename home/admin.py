@@ -1,6 +1,8 @@
 from django.contrib import admin
 from home.models import Technology
 from home.models import Category
+from home.models import Contact
+from home.models import CV
 from home.models import Framework
 from home.models import Version
 from home.models import Job
@@ -20,5 +22,5 @@ class JobAdmin(admin.ModelAdmin):
 
 
 admin.site.register([Category, Technology, Version, Framework,
-                     Company, Project, Employer])
+                     Company, Project, Employer, CV, Contact])
 admin.site.register(Job, JobAdmin)

@@ -2,6 +2,8 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from home.models import Category
+from home.models import Contact
+from home.models import CV
 from home.models import Technology
 from home.models import Framework
 from home.models import Job
@@ -68,3 +70,15 @@ def projects_detail(request, name, id):
     project = get_object_or_404(Project, id=id)
     context = {'project': project}
     return render(request, "home/projects/detail.html", context)
+
+
+def curriculum_vitae(request):
+    cv = get_object_or_404(CV, official=True)
+    context = {'cv': cv}
+    return render(request, "home/cv/detail.html", context)
+
+
+def contact(request):
+    contact_o = get_object_or_404(Contact, main=True)
+    context = {'contact': contact_o}
+    return render(request, "home/contact/detail.html", context)

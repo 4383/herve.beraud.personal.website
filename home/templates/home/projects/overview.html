@@ -46,7 +46,13 @@
                 </div>
             {% endfor %}
         </div>
-        {% include "home/projects/github.html" %}
+        <!-- Layout -->
+        <div class="col-sm-1"></div>
+        <div class="col-md-2">
+            <div class="row">
+                {% include "home/projects/github.html" %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
