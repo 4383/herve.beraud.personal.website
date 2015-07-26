@@ -74,6 +74,7 @@ class Project(models.Model):
     def generate_url(self):
         return self.name.replace(" ", "-")
 
+
 class Company(models.Model):
     name = models.CharField(max_length=150, unique=True, default="")
     description = models.TextField(max_length=300, default="")
