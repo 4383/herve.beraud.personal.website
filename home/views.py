@@ -24,7 +24,7 @@ def skills_overview(request, category='Programming', context={}):
     technologies = Technology.objects.all().filter(category=main_category, active=True).order_by('priority_display')
     context = {'technologies': technologies,
                "main_category": main_category,
-               "js_chart_data_label": [technology.name for technology in technologies],
+               "js_chart_data_label": [str(technology.name) for technology in technologies],
                "js_chart_data_level": [technology.level for technology in technologies], }
     return render(request, "home/skills/overview.html", context)
 
