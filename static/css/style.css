@@ -1,5 +1,5 @@
 .default {
-    background : url('../../img/bg_tournesol.png') no-repeat center center fixed;
+    background : url('../img/bg_tournesol.png') no-repeat center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -9,7 +9,7 @@
 }
 
 .skills-bg {
-    background : url('../../img/bg_skills.jpg') no-repeat center center fixed;
+    background : url('../img/bg_skills.jpg') no-repeat center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -19,7 +19,7 @@
 }
 
 .jobs-bg {
-    background : url('../../img/bg_jobs.jpg') repeat;
+    background : url('../img/bg_jobs.jpg') repeat;
 }
 
 .spacing {
