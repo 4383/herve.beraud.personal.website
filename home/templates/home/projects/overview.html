@@ -36,7 +36,7 @@
                                 <h4 class="text-left">{{ project.name|capfirst }}</h4>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a href="{% url 'projects_detail' name=project.name id=project.id %}" title="{{ project.contextual_description }}">
+                                <a href="{% url 'projects_detail' name=project.slug id=project.id %}" title="{{ project.contextual_description }}">
                                     <span class="glyphicon glyphicon-hand-up"></span>
                                     {% trans "Click To See Details" %}
                                 </a>

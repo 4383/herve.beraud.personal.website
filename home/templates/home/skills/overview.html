@@ -61,7 +61,7 @@
                          aria-valuemax="100"
                          style="width: {{ technology.convert_level_in_percent }}%">
                         <span class="sr-only"></span>
-                        <a href="{% url 'skills_detail' category=technology.category.name technology=technology.name %}"
+                        <a href="{% url 'skills_detail' category_slug=technology.category.slug technology_slug=technology.slug %}"
                            title="{{ technology.contextual_description }}">{{ technology.name }}</a>
                     </div>
                 </div>

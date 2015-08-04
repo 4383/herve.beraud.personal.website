@@ -38,12 +38,12 @@
                             {% for technology in project.technologies.all %}
                             <li>
                                 <h4>
-                                    <a href="{% url 'skills_detail' category=technology.category technology=technology.name %}">
+                                    <a href="{% url 'skills_detail' category_slug=technology.category.slug technology_slug=technology.slug %}">
                                         {{ technology }}
                                     </a>
                                 </h4>
                                 <p>{{ technology.description|truncatewords:30 }}...
-                                    <a href="{% url 'skills_detail' category=technology.category technology=technology.name %}">
+                                    <a href="{% url 'skills_detail' category_slug=technology.category.slug technology_slug=technology.slug %}">
                                         {% trans "Read More" %}
                                     </a>
                                 </p>

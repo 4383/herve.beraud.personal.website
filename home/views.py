@@ -19,8 +19,8 @@ def index(request):
 
 
 # Create your views here.
-def skills_overview(request, category='Programming', context={}):
-    main_category = get_object_or_404(Category, name=category)
+def skills_overview(request, category_slug='programming-language'):
+    main_category = get_object_or_404(Category, slug=category_slug)
     technologies = Technology.objects.all().filter(category=main_category, active=True).order_by('priority_display')
     context = {'technologies': technologies,
                "main_category": main_category,
@@ -29,9 +29,9 @@ def skills_overview(request, category='Programming', context={}):
     return render(request, "home/skills/overview.html", context)
 
 
-def skills_detail(request, category, technology, context={}):
-    main_technology = get_object_or_404(Technology, name=technology)
-    main_category = get_object_or_404(Category, name=category)
+def skills_detail(request, category_slug, technology_slug):
+    main_technology = get_object_or_404(Technology, slug=technology_slug)
+    main_category = get_object_or_404(Category, slug=category_slug)
     frameworks = Framework.objects.all().filter(active=True, technology=main_technology)
     context = {"main_technology": main_technology,
                "main_category": main_category,

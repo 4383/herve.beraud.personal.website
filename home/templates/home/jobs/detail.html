@@ -54,7 +54,7 @@
                 <ul>
                     {% for technology in job.project.technologies.all %}
                     <li>
-                        <a href="{% url 'skills_detail' category=technology.category technology=technology.name %}">
+                        <a href="{% url 'skills_detail' category_slug=technology.category.slug technology_slug=technology.slug %}">
                             {{ technology }}
                         </a>
                     </li>

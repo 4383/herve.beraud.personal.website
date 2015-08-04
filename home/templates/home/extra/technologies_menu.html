@@ -9,7 +9,7 @@
                         {% for technology in technologies %}
                             <li>
                                 <!--href="/skills/{{ technology.category.name }}/{{ technology.name }}/"-->
-                                <a href="{% url 'skills_detail' category=technology.category.name technology=technology.name %}"
+                                <a href="{% url 'skills_detail' category_slug=technology.category.slug technology_slug=technology.slug %}"
                                    title="{{ technology.contextual_description }}">
                                     {% if technology.icon %}
                                         <img style="height:24px; width:24px;" src="{% get_media_prefix %}{{ technology.icon }}" alt="" />

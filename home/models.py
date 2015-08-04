@@ -8,6 +8,7 @@ class Category(models.Model):
     alt_description = models.CharField(max_length=150, default=_("Show more details about this category"))
     priority_display = models.IntegerField(default=0)
     active = models.BooleanField(default=False)
+    slug = models.CharField(max_length=150, unique=True, default="")
 
     def __str__(self):
         return self.name
@@ -37,6 +38,7 @@ class Technology(models.Model):
     tools = models.TextField(max_length=500, default="")
     icon = models.ImageField(default="", upload_to="technology", blank=True)
     active = models.BooleanField(default=False)
+    slug = models.CharField(max_length=150, unique=True, default="")
 
     def __str__(self):
         return self.name
@@ -67,6 +69,7 @@ class Project(models.Model):
     url = models.URLField(default="")
     personal_project = models.BooleanField(default=False)
     logo = models.ImageField(default="", upload_to="projects", blank=True)
+    slug = models.CharField(max_length=150, unique=True, default="")
 
     def __str__(self):
         return self.name
@@ -101,6 +104,7 @@ class Job(models.Model):
     project = models.ForeignKey(Project)
     employer = models.ForeignKey(Employer, related_name="employer", default=None)
     client = models.ForeignKey(Company, related_name="client", default=None)
+    slug = models.CharField(max_length=150, unique=True, default="")
 
     def __str__(self):
         return self.name
@@ -109,8 +113,7 @@ class Job(models.Model):
         project = self.project.name.replace(" ", "-").lower()
         client = self.client.name.replace(" ", "-").lower()
         employer = self.employer.name.replace(" ", '-').lower()
-        name = self.name.replace(" ", "-").lower()
-        return "{0}/{1}/{2}/{3}/{4}/".format(project, client, employer, name, self.id)
+        return "{0}/{1}/{2}/{3}/{4}/".format(project, client, employer, self.slug, self.id)
 
 
 class Tasks(models.Model):

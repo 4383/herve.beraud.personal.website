@@ -12,7 +12,7 @@
                     {% else %}
                         <li role="presentation">
                     {% endif %}
-                    <a href="{% url 'skills' %}{{ category.name }}/" title="{{ category.alt_description }}">
+                    <a href="{% url 'skills' %}{{ category.slug }}/" title="{{ category.alt_description }}">
                     {{ category.name }}
                     </a>
                 </li>
